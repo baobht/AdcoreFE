@@ -1,9 +1,15 @@
+import CourseSection from "@/components/global/course-section";
+import HomeBanner from "@/components/global/home-banner";
+import PopularTopics from "@/components/global/popular-topics";
+import Testimonial from "@/components/global/testimonial";
+
 export default function Homepage() {
   return (
     <main className="flex flex-col">
-      <div className="min-h-[calc(100dvh-100px)] pl-[15.625%] bg-[url('/image/wave.svg')] bg-center bg-no-repeat bg-cover">
-        abc
-      </div>
+      <HomeBanner />
+      <PopularTopics />
+      <CourseSection />
+      <Testimonial />
     </main>
   );
 }

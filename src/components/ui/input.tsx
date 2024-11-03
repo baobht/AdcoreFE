@@ -7,15 +7,19 @@ export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   startIcon?: LucideIcon;
   endIcon?: LucideIcon;
+  fullWidth?: boolean;
   onIconClick?: () => void;
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type, startIcon, endIcon, onIconClick, ...props }, ref) => {
+  (
+    { className, type, startIcon, endIcon, onIconClick, fullWidth, ...props },
+    ref
+  ) => {
     const StartIcon = startIcon;
     const EndIcon = endIcon;
     return (
-      <div className=" lg:w-1/4 w-1/2 relative">
+      <div className={cn("lg:w-1/4 w-1/2 relative", fullWidth && "!w-full")}>
         {StartIcon && (
           <div
             onClick={onIconClick}

@@ -2,7 +2,7 @@
 import Image from "next/image";
 import React from "react";
 import Menu from "./menu";
-import { Input } from "./ui/input";
+import { Input } from "../ui/input";
 import { MenuIcon, Search } from "lucide-react";
 import axios from "axios";
 import { API_URL } from "@/constants";

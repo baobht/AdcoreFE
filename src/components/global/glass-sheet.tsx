@@ -1,5 +1,5 @@
 import React from "react";
-import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "./ui/sheet";
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "../ui/sheet";
 import { cn } from "@/lib/utils";
 
 type GlassSheetProps = {
