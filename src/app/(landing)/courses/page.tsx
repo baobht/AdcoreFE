@@ -3,7 +3,7 @@ import CourseList from "@/components/global/course-list";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 
 export default function Courses() {
   const [search, setSearch] = useState("");
@@ -21,9 +21,8 @@ export default function Courses() {
 
     if (debouncedValue) {
       router.push(`?search=${debouncedValue}`);
-    } else{
+    } else {
       router.push(`/courses`);
-
     }
 
     return () => controller.abort();
@@ -46,7 +45,9 @@ export default function Courses() {
           placeholder="Search title or category"
           endIcon={Search}
         />
-        <CourseList />
+        <Suspense fallback={<div>Loading...</div>}>
+          <CourseList />
+        </Suspense>
       </div>
     </main>
   );

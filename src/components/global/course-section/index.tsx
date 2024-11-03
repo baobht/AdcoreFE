@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import React from "react";
+import React, { Suspense } from "react";
 import CourseList from "../course-list";
 
 const CourseSection = () => {
@@ -23,7 +23,9 @@ const CourseSection = () => {
           </Button>
         </div>
       </div>
-      <CourseList isTopRated/>
+      <Suspense fallback={<div>Loading...</div>}>
+        <CourseList isTopRated />
+      </Suspense>
     </div>
   );
 };
