@@ -11,9 +11,9 @@ const Navbar = () => {
   const [search, setSearch] = React.useState("");
   const router = useRouter();
 
-  const onSearch = async () => {
-    if (search) {
-      router.push(`/courses?search=${search}`);
+  const onSearch = async (value?: string) => {
+    if (search || value) {
+      router.push(`/courses?search=${search || value}`);
     } else {
       router.push(`/courses`);
     }
@@ -27,7 +27,7 @@ const Navbar = () => {
         onChange={(e) => setSearch(e.target.value)}
         onKeyDown={(e) => {
           if (e.key === "Enter") {
-            onSearch();
+            onSearch((e.target as HTMLInputElement).value);
           }
         }}
         type="text"
