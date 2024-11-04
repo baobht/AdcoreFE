@@ -4,20 +4,19 @@ import React from "react";
 import Menu from "./menu";
 import { Input } from "../ui/input";
 import { MenuIcon, Search } from "lucide-react";
-import axios from "axios";
-import { API_URL } from "@/constants";
 import GlassSheet from "./glass-sheet";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
   const [search, setSearch] = React.useState("");
+  const router = useRouter();
 
   const onSearch = async () => {
-    const data = await axios.get(`${API_URL}/v1/api/courses`, {
-      params: {
-        search: search,
-      },
-    });
-    console.log("🚀 ~ onSearch ~ data:", data);
+    if (search) {
+      router.push(`/courses?search=${search}`);
+    } else {
+      router.push(`/courses`);
+    }
   };
   return (
     <header className="w-full bg-white h-[100px] flex justify-between sticky top-0 items-center py-5 z-50 lg:px-[min(300px,15.625%)] sm:px-[5%]">
@@ -26,6 +25,11 @@ const Navbar = () => {
       <Input
         value={search}
         onChange={(e) => setSearch(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            onSearch();
+          }
+        }}
         type="text"
         placeholder="Search courses"
         endIcon={Search}

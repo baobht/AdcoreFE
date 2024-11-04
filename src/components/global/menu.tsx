@@ -1,14 +1,14 @@
 "use client";
 import { MENU_ITEMS } from "@/constants/menu";
-import { useSection } from "@/hooks/navigation";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import React from "react";
 
 type Props = { orientation?: "mobile" | "desktop" };
 
 const Menu = ({ orientation }: Props) => {
-  const { section, setSection } = useSection();
+  const pathName = usePathname();
   switch (orientation) {
     case "desktop": {
       return (
@@ -18,11 +18,10 @@ const Menu = ({ orientation }: Props) => {
               href={item.path}
               className={cn(
                 "px-7 py-2 text-lg rounded-[100px] cursor-pointer",
-                item.path === section &&
+                item.path === pathName &&
                   "border border-[#704FE6] text-[#704FE6] "
               )}
               key={item.id}
-              onClick={() => setSection(item.path)}
             >
               {item.label}
             </Link>
@@ -36,10 +35,9 @@ const Menu = ({ orientation }: Props) => {
           {MENU_ITEMS.map((menuItem) => (
             <Link
               href={menuItem.path}
-              onClick={() => setSection(menuItem.path)}
               className={cn(
                 "rounded-xl flex gap-2 py-2 px-4 items-center",
-                section == menuItem.path ? "text-[#704FE6]" : ""
+                pathName == menuItem.path ? "text-[#704FE6]" : ""
               )}
               key={menuItem.id}
             >

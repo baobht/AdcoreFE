@@ -2,12 +2,14 @@
 import CourseList from "@/components/global/course-list";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
 
 export default function Courses() {
   const [search, setSearch] = useState("");
   const router = useRouter();
+  const params = useSearchParams();
+  const searchParam = params.get("search");
   const [debouncedValue, setDebouncedValue] = useState(search);
 
   useEffect(() => {
@@ -27,6 +29,12 @@ export default function Courses() {
 
     return () => controller.abort();
   }, [debouncedValue, router]);
+
+  useEffect(() => {
+    if (searchParam) {
+      setSearch(searchParam);
+    }
+  }, [searchParam]);
   return (
     <main className="flex flex-col">
       <div
